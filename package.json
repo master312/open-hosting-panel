@@ -1,0 +1,19 @@
+{
+  "name": "open-hosting-panel",
+  "version": "0.1.0",
+  "main": "backend/server.js",
+  "scripts": {
+    "client-install": "cd client && npm install",
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "concurrently": "^4.1.0",
+    "express": "^4.16.2"
+  }
+}

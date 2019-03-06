@@ -22,7 +22,7 @@ All api calls must have oauth2 barrier token included in header.
 **Service:**
 All service api calls start with /api/services/
 
-*** GET '/' ***
+### GET '/'
 Return array of all services owned by user
 ```javascript
 {
@@ -34,7 +34,7 @@ Return array of all services owned by user
 }
 ```
 
-*** GET '/{$id}' ***
+### GET '/{$id}'
 Return info about specified service id. Or 404 if not found.
 
 ```javascript
@@ -48,7 +48,7 @@ Return info about specified service id. Or 404 if not found.
 }
 ```
 
-*** POST '/new' ***
+### POST '/new'
 *Content-Type: application/json*
 Creates new service. 
 

@@ -13,3 +13,60 @@ npm run client-install
 npm run dev
 
 ```
+
+
+**REST API:**
+For all API calls, client must be authenticated to oauth2 server.
+All api calls must have oauth2 barrier token included in header.
+
+**Service:**
+All service api calls start with /api/services/
+
+*** GET '/' ***
+Return array of all services owned by user
+```javascript
+{
+    "count": 2,
+    "service": [
+        {"id":13, "type":"nodejs", "name":"the_service", "state":"running"},
+        {"id":14, "type":"nodejs", "name":"jesus_christ.com", "state":"stopped"}
+    ]
+}
+```
+
+*** GET '/{$id}' ***
+Return info about specified service id. Or 404 if not found.
+
+```javascript
+{
+    "id":13,
+    "type":"nodejs", 
+    "state":"running",
+    "name":"the_service",
+    "domain":"the_service.com",
+    "uptime":"4235345"              // Upime in seconds
+}
+```
+
+*** POST '/new' ***
+*Content-Type: application/json*
+Creates new service. 
+
+Request format:
+```javascript
+{
+    "type":"nodejs", 
+    "name":"new_service",
+    "domain":"new_service.com",
+    // TODO....
+}
+```
+
+Response format:
+```javascript
+{
+    "id":123,
+    "success":true,
+    "message":"Service created successfully" // Can be an error message
+}
+```

@@ -70,3 +70,35 @@ Response format:
     "message":"Service created successfully" // Can be an error message
 }
 ```
+
+### POST '/delete/{$id}'
+Deletes service.
+Return 204 - No Content on success
+Return 400 - Bad Request on error
+In case of error, error message is returned as *Content-Type: application/json*
+
+Error message format:
+```javascript
+{
+    "message":"Power outage in datacenter"
+}
+```
+
+### POST '/start/{$id}'
+Start service.
+Return 204 - No Content on success
+Return 409 - Conflict (if service is already running)
+
+### POST '/stop/{$id}'
+Stop service.
+Return 204 - No Content on success
+Return 409 - Conflict (if service is not running)
+
+### POST '/restart/{$id}'
+Restart service.
+Return 204 - No Content on success
+Return 400 - Bad Request on error
+
+
+### POST '/edit/{$id}'
+*.....TODO.....*

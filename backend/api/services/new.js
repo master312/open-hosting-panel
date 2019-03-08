@@ -1,7 +1,8 @@
-const express = require("express");
+const express = require('express');
+const logger = require('../../core/logger')
 
 let router = express.Router();
-router.apiPath = "/new";
+router.apiPath = '/new';
 
 /* Validates new service json data 
  * TODO: STUB */
@@ -12,11 +13,11 @@ function validateData(jsonData) {
 function generateResponse(id, type, success, message) {
   var response = {};
   if (success) {
-    response["id"] = id;
-    response["type"] = type;
+    response['id'] = id;
+    response['type'] = type;
   }
-  response["success"] = success;
-  response["message"] = message;
+  response['success'] = success;
+  response['message'] = message;
   return response;
 }
 
@@ -26,13 +27,13 @@ router.post('/', (req, res) => {
   if (!validateData(jsonData)) {
     /* Bad request */
     res.status(400);
-    res.send(generateResponse(null, null, false, "Invalid body data."));
-    console.log("invalid data");
+    res.send(generateResponse(null, null, false, 'Invalid body data.'));
+    logger.log('Could not create new service. Invalid user data.', logger.EXCEPTION);
     return;
   }
   
-  res.send(generateResponse(1666, jsonData.type, true, "Service created successfully."));
-  console.log("New service created. " + jsonData);
+  res.send(generateResponse(1666, jsonData.type, true, 'Service created successfully.'));
+  logger.log('New service created.', logger.INFO);
 });
 
 

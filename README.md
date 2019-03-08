@@ -18,6 +18,11 @@ npm run dev
 **REST API:**
 For all API calls, client must be authenticated to oauth2 server.
 All api calls must have oauth2 barrier token included in header.
+EX:
+```
+Authorization: Bearer 0b79bab50daca910b000d4f1a2b675d604257e42
+```
+
 
 **Service:**
 All service api calls start with /api/services/

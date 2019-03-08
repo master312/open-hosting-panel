@@ -1,6 +1,7 @@
 const express = require("express");
 
 let router = express.Router();
+router.apiPath = "/hello_wolrd_test";
 
 router.get('/', (req, res) => {
 

@@ -2,8 +2,12 @@ const express = require("express");
 
 let router = express.Router();
 
+function useApiRouter(filename) {
+  var functionRouter = require(filename);
+  router.use(functionRouter.apiPath, functionRouter);
+}
 
-router.use('/hello_wolrd_test', require('./hello_world'));
-
+useApiRouter('./hello_world');
+useApiRouter('./services');
 
 module.exports = router

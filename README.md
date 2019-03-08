@@ -72,9 +72,11 @@ Response format:
 {
     "id":123,
     "success":true,
+    "type":"nodejs",
     "message":"Service created successfully" // Can be an error message
 }
 ```
+Id and type parameters are not send if success == false
 
 ### POST '/delete/{$id}'
 Deletes service.

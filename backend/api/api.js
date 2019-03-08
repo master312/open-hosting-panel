@@ -8,6 +8,6 @@ function useApiRouter(filename) {
 }
 
 useApiRouter('./hello_world');
-useApiRouter('./services');
+useApiRouter('./services/services');
 
 module.exports = router

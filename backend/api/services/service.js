@@ -51,6 +51,33 @@ router.post('/delete/:id', (req, res) => {
   res.send();
 });
 
+/* TODO: STUB */
+router.post('/start/:id', (req, res) => {
+  if (!checkServiceId(req, res)) {
+    return;
+  }
+  res.status(204);
+  res.send();
+});
+
+/* TODO: STUB */
+router.post('/stop/:id', (req, res) => {
+  if (!checkServiceId(req, res)) {
+    return;
+  }
+  res.status(204);
+  res.send();
+});
+
+/* TODO: STUB */
+router.post('/restart/:id', (req, res) => {
+  if (!checkServiceId(req, res)) {
+    return;
+  }
+  res.status(204);
+  res.send();
+});
+
 var apiNew = require('./new');
 router.use(apiNew.apiPath, apiNew);
 

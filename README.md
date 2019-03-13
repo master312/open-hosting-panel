@@ -33,23 +33,35 @@ Return array of all services owned by user
 {
     "count": 2,
     "service": [
-        {"id":13, "type":"nodejs", "name":"the_service", "state":"running"},
-        {"id":14, "type":"nodejs", "name":"jesus_christ.com", "state":"stopped"}
+        {"id":13, "runner":"nodejs", "name":"the_service", "state":"running"},
+        {"id":14, "runner":"nodejs", "name":"jesus_christ.com", "state":"stopped"}
     ]
 }
 ```
 
 ### GET '/{$id}'
+*Content-Type: application/json*
 Return info about specified service id. Or 404 if not found.
 
 ```javascript
 {
     "id":13,
-    "type":"nodejs", 
+    "runner":"nodejs", 
     "state":"running",
     "name":"the_service",
     "domain":"the_service.com",
     "uptime":"4235345"              // Upime in seconds
+}
+```
+
+### GET '/runners/'
+*Content-Type: application/json*
+Returns list of available service runners.
+
+Request format:
+```javascript
+{
+    "runners":['nodejs', 'php', 'java']
 }
 ```
 
@@ -60,7 +72,7 @@ Creates new service.
 Request format:
 ```javascript
 {
-    "type":"nodejs", 
+    "runner":"nodejs", 
     "name":"new_service",
     "domain":"new_service.com",
     // TODO....
@@ -72,11 +84,11 @@ Response format:
 {
     "id":123,
     "success":true,
-    "type":"nodejs",
+    "runner":"nodejs",
     "message":"Service created successfully" // Can be an error message
 }
 ```
-Id and type parameters are not send if success == false
+Id and runner parameters are not send if success == false
 
 ### POST '/delete/{$id}'
 Deletes service.

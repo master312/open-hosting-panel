@@ -8,9 +8,17 @@ router.get('/', (req, res) => {
   const demoData = {
     "count": 2,
     "service": [
-      {"id":13, "type":"nodejs", "name":"the_service", "state":"running"},
-      {"id":14, "type":"nodejs", "name":"jesus_christ_srv", "state":"stopped"}
+      {"id":13, "runner":"nodejs", "name":"the_service", "state":"running"},
+      {"id":14, "runner":"nodejs", "name":"jesus_christ_srv", "state":"stopped"}
     ]
+  };
+  res.json(demoData);
+});
+
+/* TODO: STUB */
+router.get('/runners/', (req, res) => {
+  const demoData = {
+    "runners": ['nodejs', 'php', 'java']
   };
   res.json(demoData);
 });
@@ -33,7 +41,7 @@ router.get('/:id', (req, res) => {
 
   const demoData = {
     "id": req.params.id,
-    "type": "nodejs", 
+    "runner": "nodejs", 
     "state": "running",
     "name": "the_service",
     "domain": "the_service.com",

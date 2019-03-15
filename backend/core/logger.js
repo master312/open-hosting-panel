@@ -23,7 +23,13 @@ logger.log = function(message, type) {
   if (type == null) {
     type = logger.DEBUG;
   }
-  console.log(loggerLevelText[type] + ": " + message);
+  var msg = loggerLevelText[type] + ": " + message;
+
+  if (type == logger.EXCEPTION) {
+    console.error(msg);
+  } else {
+    console.log(msg);
+  }
 }
 
 module.exports = logger;

@@ -9,6 +9,11 @@ function construct(id, config) {
   Object.assign(this, new runnerBase(id, name, version))
   this.config = config;
 
+  this.initialize = function() {
+    logger.log("Initializing NodeJS runner");
+    /* TODO: Create docker container, setup shit, store container name etc...*/
+  }
+
   this.start = function() {
     logger.log("Starting NodeJS");
     if (!this.validateConfig()) {

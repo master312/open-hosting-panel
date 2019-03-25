@@ -7,6 +7,8 @@ module.exports = function(id, name, version) {
   this.version = version;
   this.config = null;  
   
+  /* Function that initalizes runner, and sets initial configuration */
+  this.initialize = function() { logger.log("Initialize function not implemented!", logger.ERROR) };
   /* Function starts runner */
   this.start = function() { logger.log("Start function not implemented!", logger.ERROR) };
   /* Function stops runner */

@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./database')
 
-// var runnerManager = require('./runner');
-// runnerManager.init();
+var runnerManager = require('./runner');
+runnerManager.init();
 
 // var nodeRunner = runnerManager.get('NodeJS', '10.15.3');
 // console.log(nodeRunner);

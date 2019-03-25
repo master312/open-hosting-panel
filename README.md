@@ -61,7 +61,18 @@ Returns list of available service runners.
 Request format:
 ```javascript
 {
-    "runners":['nodejs', 'php', 'java']
+    "runners":[
+        {
+            "name": "NodeJS",
+            "version": "10.15.3"
+        },  {
+            "name": "PHP",
+            "version": "7.0.3"
+        }, {
+            "name": "JAVA",
+            "version": "8"
+        }
+    ]
 }
 ```
 

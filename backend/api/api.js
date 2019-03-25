@@ -7,7 +7,7 @@ function useApiRouter(filename) {
   router.use(functionRouter.apiPath, functionRouter);
 }
 
-useApiRouter('./hello_world');
+useApiRouter('./hello-world');
 useApiRouter('./services/service');
 
 

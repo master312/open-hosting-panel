@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const logger = require('../core/logger')
+const logger = require('./core/logger')
 
 /* TODO: Pull form config file */
 const dbHost = 'balarama.db.elephantsql.com';

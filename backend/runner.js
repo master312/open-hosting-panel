@@ -7,12 +7,10 @@ var self = {};
 /* Array containing all runner constructor functions (not actual instances) */
 self.runners = [];
 
-/* Array containing all runner instances */
-self.instances = [];
-
 /* Initialize runners */
 self.init = function() {
     self.runners.push(nodeJs10);
+    /* Remainder: Push other runners here */
     
     logger.log("Runner manager found " + self.runners.length + " runners available", logger.INFO);
 }

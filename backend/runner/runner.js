@@ -1,8 +1,7 @@
 var logger = require('../core/logger')
 
 /* Base object for every runner */
-module.exports = function(id, name, version) {
-  this.id = id;
+module.exports = function(name, version) {
   this.name = name;
   this.version = version;
   this.config = null;  

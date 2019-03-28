@@ -32,6 +32,8 @@ router.post('/', (req, res) => {
     return;
   }
   
+  /* TODO: Create new service here! */
+
   res.send(generateResponse(1666, jsonData.type, true, 'Service created successfully.'));
   logger.log('New service created.', logger.INFO);
 });

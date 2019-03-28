@@ -5,8 +5,8 @@ var runnerBase = require('./runner')
 var name = "NodeJS";
 var version = "10.15.3";
 
-function construct(id, config) {
-  Object.assign(this, new runnerBase(id, name, version))
+function construct(config) {
+  Object.assign(this, new runnerBase(name, version))
   this.config = config;
 
   this.initialize = function() {

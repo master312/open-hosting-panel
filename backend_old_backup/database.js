@@ -1,11 +1,22 @@
 const Sequelize = require('sequelize')
-const config = require('./config/db')
-const { logger } = require('./utils')
+const logger = require('./core/logger')
 
-const sequelize = new Sequelize(config.name, config.user, config.pass, {
-  host: config.host,
+/* TODO: Pull form config file */
+const dbHost = 'balarama.db.elephantsql.com';
+const dbName = 'mbmsczsc';
+const dbUser = 'mbmsczsc';
+const dbPass = 'vASPL8CVocZG3HbMj8KD0_zd1cEqOlrs';
+const dbPool = {
+  max: 10,
+  min: 0,
+  acquire: 30000,
+  idle: 10000
+};
+
+const sequelize = new Sequelize(dbName, dbUser, dbPass, {
+  host: dbHost,
   dialect: 'postgres',
-  pool: config.pool
+  pool: dbPool
 });
 
 sequelize.authenticate()

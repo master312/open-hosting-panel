@@ -25,7 +25,7 @@ Authorization: Bearer 0b79bab50daca910b000d4f1a2b675d604257e42
 
 
 **Service:**
-All service api calls start with /api/services/
+All service api calls start with /api/service/
 
 ### GET '/'
 Return array of all services owned by user

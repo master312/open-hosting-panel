@@ -1,0 +1,2 @@
+U clientu, imena REACT kompoenti, scena i servisa pocunju velikim slovima. Sve ostalo malim!
+U BackEnd-u, sve malim slovima!

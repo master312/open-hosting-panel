@@ -11,8 +11,6 @@ const getAll = async(req, res, next) => {
     res.send(instances);
     next()
   } catch(error) {
-    logger.log(error.message, logger.EXCEPTION)
-    res.sendStatus(500)
     next(error)
   }
 }
@@ -25,8 +23,6 @@ const get = async(req, res, next) => {
     res.send(instance);
     next()
   } catch(error) {
-    logger.log(error.message, logger.EXCEPTION)
-    res.sendStatus(500)
     next(error)
   }
 }
@@ -35,8 +31,6 @@ const getRunners = async(req, res, next) => {
   try {
     next()
   } catch(error) {
-    logger.log(error.message, logger.EXCEPTION)
-    res.sendStatus(500)
     next(error)
   }
 }
@@ -47,8 +41,6 @@ const newInstance = async(req, res, next) => {
     res.sendStatus(200)
     next()
   } catch(error) {
-    logger.log(error.message, logger.EXCEPTION)
-    res.sendStatus(500)
     next(error)
   }
 }
@@ -57,8 +49,6 @@ const start = async(req, res, next) => {
   try {
     next()
   } catch(error) {
-    logger.log(error.message, logger.EXCEPTION)
-    res.sendStatus(500)
     next(error)
   }
 }
@@ -67,8 +57,6 @@ const stop = async(req, res, next) => {
   try {
     next()
   } catch(error) {
-    logger.log(error.message, logger.EXCEPTION)
-    res.sendStatus(500)
     next(error)
   }
 }
@@ -77,8 +65,6 @@ const restart = async(req, res, next) => {
   try {
     next()
   } catch(error) {
-    logger.log(error.message, logger.EXCEPTION)
-    res.sendStatus(500)
     next(error)
   }
 }
@@ -90,8 +76,6 @@ const deleteInstance = async(req, res, next) => {
     res.sendStatus(200)
     next()
   } catch(error) {
-    logger.log(error.message, logger.EXCEPTION)
-    res.sendStatus(500)
     next(error)
   }
 }
@@ -100,8 +84,6 @@ const edit = async(req, res, next) => {
   try {
     next()
   } catch(error) {
-    logger.log(error.message, logger.EXCEPTION)
-    res.sendStatus(500)
     next(error)
   }
 }

@@ -7,6 +7,10 @@ import Alert from './components/Alert'
 
 import Header from '../../components/header/Header'
 
+/* TODO: Move this to config */
+const USERNAME_MIN_LEN = 3
+const PASSWORD_MIN_LEN = 3
+
 class Login extends Component {
 
   constructor() {
@@ -21,7 +25,7 @@ class Login extends Component {
   componentWillMount() {
     /* If already logged in, redirect to panel. */
     getSessionInfo().then((data) => {
-      console.log('Already logged in. Redirecting...')
+      console.log('Already logged in. Redirecting...')  
       this.props.history.push('/panel')
     }).catch((error) => {
     })
@@ -49,17 +53,22 @@ class Login extends Component {
       return
     }
   
-    if (!this.state.username || this.state.username.length <= 1 || !this.state.password || this.state.password.length <= 1) {
-      alert("Username or/and password are too short or missing")
+    if (!this.state.username || !this.state.password) {
+      this.refs.Alert.show('warning', 'Please enter username and password')
       return
     }
     
+    if (this.state.username.length < USERNAME_MIN_LEN || this.state.password.length < PASSWORD_MIN_LEN) {
+      this.refs.Alert.show('warning', 'Username or password are too short')
+      return
+    }
+
     /* Disable input */
     this.setInputState(false)
     this.refs.Alert.hide()
 
     login(this.state.username, this.state.password).then(() => {
-      this.refs.Alert.show('info', 'Login successfull!')
+      this.refs.Alert.show('success', 'Login successfull!')
       setTimeout(() => this.props.history.push('/'), 2000)
     }).catch((error) => {
       setTimeout(() => {

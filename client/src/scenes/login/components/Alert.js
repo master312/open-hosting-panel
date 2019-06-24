@@ -20,9 +20,7 @@ class Alert extends Component {
       text: text
     })
 
-    if (this.timeout) {
-      clearTimeout(this.timeout)
-    }
+    clearTimeout(this.timeout)
 
     this.timeout = setTimeout(() => this.setState({isFadingOut: true}), 4000)
   }

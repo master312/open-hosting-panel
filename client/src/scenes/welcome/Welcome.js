@@ -11,6 +11,7 @@ class Welcome extends Component {
       <div>
         <Header />
         <h1> Welcome page</h1>
+        <button onClick={()=> this.props.history.push('/login') }>Login</button>
       </div>
     )
   }

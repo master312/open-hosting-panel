@@ -22,8 +22,19 @@ const getUserInfo = () => {
     /* TODO */
 }
 
+/**
+ * Sends login request to backend. Saves access token to local store if login was successfull.
+ * Promises response, wether loggedin or failed
+ * @param {*} username
+ * @param {*} password 
+ */
+const login = (username, password) => {
+    /* TODO */
+}
+
 module.exports = {
     getAccessToken,
     isSessionValid,
-    getUserInfo
+    getUserInfo,
+    login
 }

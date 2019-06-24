@@ -11,9 +11,9 @@ class Header extends Component {
 
   render() {
     return (
-        <header className="Header-root">
-          <img src={logo} className="Header-logo" alt="logo" onClick={() => this.onClick()} />
-          <h1 className="Header-title">Open hosting panel</h1>
+        <header className="header-root">
+          <img src={logo} className="header-logo" alt="logo" onClick={() => this.onClick()} />
+          <h1 className="header-title">Open hosting panel</h1>
         </header>
     )
   }

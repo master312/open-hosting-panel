@@ -1,8 +1,6 @@
-const express = require('express')
-
 const { auth } = require('../controller')
 
-const router = express.Router()
+const router = require('../router')();
 
 /**
  * Authenticate user and returns access token
@@ -14,6 +12,11 @@ router.post('/login', auth.login)
  */
 router.post('/register', auth.register)
 
+/**
+ * Ends user session
+ */
+router.secure('/logout')
+router.post('/logout', auth.logout)
 
 module.exports = router
 

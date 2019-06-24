@@ -24,6 +24,10 @@ const login = async(req, res, next) => {
   }
 }
 
+const logout = async(req, res, next) => {
+  /* TODO... */
+}
+
 const register = async(req, res, next) => {
   res.status(400)
   res.send("User registration unavailable!")
@@ -31,5 +35,6 @@ const register = async(req, res, next) => {
 
 module.exports = {
   login,
+  logout,
   register
 }

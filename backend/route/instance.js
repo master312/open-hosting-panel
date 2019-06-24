@@ -1,34 +1,55 @@
-const express = require('express')
-
 const { instance } = require('../controller')
 
-const router = express.Router()
+const router = require('../router')()
 
-/* Returns list of all instances */
+/**
+ * Secure every end point on this router
+ */
+router.secure()
+
+/**
+ *  Returns list of all instances
+ */
 router.get('/', instance.getAll)
 
-/* Returns details of single instance by ID */
+/**
+ *  Returns details of single instance by ID
+ */
 router.get('/:id', instance.get)
 
-/* Returns list of all available instance runners (nodejs, php, java, etc...) */
+/** 
+ * Returns list of all available instance runners (nodejs, php, java, etc...)
+ */
 router.get('/runners', instance.getRunners)
 
-/* Create new instance */
+/**
+ * Create new instance 
+ */
 router.post('/new', instance.newInstance)
 
-/* Start instance */
+/** 
+ * Start instance
+ */
 router.put('/start/:id', instance.start)
 
-/* Stop instance */
+/** 
+ * Stop instance
+ */
 router.put('/stop/:id', instance.stop)
 
-/* Restart instance */
+/** 
+ * Restart instance
+ */
 router.put('/restart/:id', instance.restart)
 
-/* Deletes instance */
+/**
+ * Deletes instance
+ */
 router.put('/delete/:id', instance.deleteInstance)
 
-/* Edit instance */
+/**
+ * Edit instance
+ */
 router.post('/edit/:id', instance.edit)
 
 module.exports = router

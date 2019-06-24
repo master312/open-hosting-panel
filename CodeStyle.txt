@@ -8,3 +8,4 @@ U BackEnd-u, sve malim slovima!
 -- User status (banned/unbanned)
 -- Encrypt passwords in DB
 -- Check model for unique, indexes and stuff
+-- User logout on backend

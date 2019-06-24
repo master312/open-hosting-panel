@@ -11,13 +11,11 @@ import { getAccessToken } from '../services/Auth'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 
-  const isLoggedIn = getAccessToken() != null;
-
   return (
     <Route
       {...rest}
       render={props =>
-        isLoggedIn ? (
+        getAccessToken() ? (
           <Component {...props} />
         ) : (
           <Redirect to={{ pathname: '/', state: { from: props.location } }} />

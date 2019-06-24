@@ -1,19 +1,26 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import Auth from '../../services/Auth'
 import logo from './logo.svg'
 import './Header.css'
 
 class Header extends Component {
 
-  onClick() {
+  onLogoClick() {
     this.props.history.push("/") 
+  }
+
+  onLogoutClick() {
+    Auth.logout();
   }
 
   render() {
     return (
         <header className="header-root">
-          <img src={logo} className="header-logo" alt="logo" onClick={() => this.onClick()} />
-          <h1 className="header-title">Open hosting panel</h1>
+          <img src={logo} className="header-logo" alt="logo" onClick={() => this.onLogoClick()} />
+          <button onClick={() => this.onLogoutClick()} >LOGOUT</button>
+          <h1 className="header-title">Open hosting panel </h1>
+          
         </header>
     )
   }

@@ -8,7 +8,7 @@ const getAccessToken = () => {
 }
 
 /**
- * Returns boolean wether current user session is stil valid
+ * Checks with backend, wether current user session is stil valid
  */
 const isSessionValid = () => {
   /* TODO */
@@ -45,9 +45,16 @@ const login = (username, password) => {
   })
 }
 
+const logout = () => {
+  localStorage.removeItem('AccessToken')
+  window.location.reload()
+  /* TODO: Send logout to server! */
+}
+
 module.exports = {
   getAccessToken,
   isSessionValid,
   getUserInfo,
-  login
+  login,
+  logout
 }

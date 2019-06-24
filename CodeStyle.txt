@@ -1,2 +1,9 @@
 U clientu, imena REACT kompoenti, scena i servisa pocunju velikim slovima. Sve ostalo malim!
 U BackEnd-u, sve malim slovima!
+
+
+----- Podsetnici ------
+-- MOZADA da se otarasis indexa services, controllers i tako to, i da preimenujes sve fajlove u 'user->user_servce' 'auth->auth_service' 'instance->instance_service' itd. I da zajebes ove glupe inkludove require('../service').auth, vec radi require('../service/auth_service')
+-- User permissions
+-- User status (banned/unbanned)
+-- Check model for unique, indexes and stuff

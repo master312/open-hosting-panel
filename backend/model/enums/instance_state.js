@@ -1,4 +1,3 @@
-
 module.exports = {
   uninitialized: "Uninitialized",
   running: "Running",

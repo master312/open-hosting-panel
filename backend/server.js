@@ -1,49 +1,70 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const port = 5000;
+const port = 5000
+const authService = require('./service/auth')
+const { logger } = require('./utils')
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => res.send('App is working'))
 
 
 function useAuthenticatedRouter(path, router) {
   var authenticationHandler = function (req, res, next) {
-    // TODO ...
-    // var authHeader = req.get('Authorization');
-    // if (!authHeader) {
-    //   /* Missing header */
-    //   res.status(401);
-    //   res.send();
-    //   return;
-    // }
-    // if (authHeader != "Bearer 8d090338-935b-4afd-9c52-5792c1a74701") {
-    //   /* Invalid token */
-    //   res.status(401);
-    //   res.send('Invalid token');
-    //   return;
-    // }
+    /* TODO: Move this handler to service */
     
-    // TODO: Stub fake user data
-    req.auth = {}
-    req.auth.user = {
-      id: 1,
-      username: 'majmun666',
-      permission: 3
+    var authHeader = req.get('Authorization')
+    if (!authHeader) {
+      /* Missing header */
+      res.status(401)
+      res.send()
+      return
     }
-
-    next();
+    var tokenSplit = authHeader.split(/\s+/); 
+    if (tokenSplit[0] !== 'Bearer') {
+      res.status(401)
+      res.send('Invalid token type ' + tokenSplit[0])
+      return;
+    }
+    var authSession = authService.getSessionForToken(tokenSplit[1])
+    if (!authSession) {
+      /* Invalid token */
+      res.status(401)
+      res.send('Invalid token')
+      return
+    }
+    if (authSession.hasExpired()) {
+      /* Session expired */
+      res.status(401)
+      res.send('Session expired')
+      return
+    }
+    
+    /* Stores session to request object, so that controllers can access it */
+    req.auth = authSession
+    next()
   }
   
-  app.use(path, authenticationHandler);
-  app.use(path, router);
+  app.use(path, authenticationHandler)
+  app.use(path, router)
 }
 
 require('./model')
 
-useAuthenticatedRouter('/api/instance', require('./route/instance'));
+/* Make use of routes */
+app.use('/auth', require('./route/auth'))
+useAuthenticatedRouter('/api/instance', require('./route/instance'))
+
+/* Exception handling method */
+app.use(function (err, req, res, next) {
+  if (err.statusCode == 500) {
+    /* Log to console ONLY on error 500*/
+    logger.log("ExpressException:" + err.message + " STACK: " + err.stack, logger.EXCEPTION);
+  }
+  res.status(err.statusCode || 500).send(err.message || 'Server error')
+})
 
 app.listen(port, () => console.log('Server running on port ' + port))
 
@@ -64,4 +85,4 @@ module.exports = {
 
 // console.log("a")
 // testA()
-// console.log("b");
+// console.log("b")

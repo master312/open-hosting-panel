@@ -1,4 +1,4 @@
-const { instanceState } = require('../enum')
+const enumInstanceState = require('../model/enums/instance_state')
 const instanceModel = require('../model').instance
 
 const getAll = async(user) => {
@@ -25,7 +25,7 @@ const getRunners = async(userId, id) => {
 const newInstance = async(user, model) => {
   /* TODO: Handle inavlid model data exceptions */
   model.id = null
-  model.state = instanceState.uninitialized
+  model.state = enumInstanceState.uninitialized
   await instanceModel.create(model)
 }
 

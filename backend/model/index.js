@@ -3,7 +3,6 @@
 const fs = require('fs')
 const path = require('path')
 const sequelize = require('../database')
-const config = require('../config/db')
 const basename  = path.basename(__filename);
 var db = {}
 
@@ -24,10 +23,12 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize
 
-sequelize.sync({ force: config.forceSync })
+if (sequelize.forceCreate) {
+  sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
   })
+}
 
 
 module.exports = db

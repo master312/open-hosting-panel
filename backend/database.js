@@ -1,12 +1,5 @@
-const Sequelize = require('sequelize')
-const config = require('./config/db')
+const sequelize = require('./config/db')
 const { logger } = require('./utils')
-
-const sequelize = new Sequelize(config.name, config.user, config.pass, {
-  host: config.host,
-  dialect: 'postgres',
-  pool: config.pool
-});
 
 sequelize.authenticate()
   .then(() => {

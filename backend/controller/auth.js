@@ -25,7 +25,13 @@ const login = async(req, res, next) => {
 }
 
 const logout = async(req, res, next) => {
-  /* TODO... */
+  try {
+    service.logout(req.auth)
+    res.status(200)
+    res.send()
+  } catch(error) {
+    next(error)
+  }
 }
 
 const register = async(req, res, next) => {

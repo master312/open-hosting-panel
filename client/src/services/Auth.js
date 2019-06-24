@@ -23,6 +23,13 @@ const getUserInfo = () => {
 }
 
 /**
+ * Returns object containing headers with authorization related data
+ */
+const getAuthHeaders = () => {
+  return {Authorization: "Bearer " + localStorage.getItem('AccessToken')}
+}
+
+/**
  * Sends login request to backend. Saves access token to local store if login was successfull.
  * Promises response, wether loggedin or failed
  * @param {*} username
@@ -36,7 +43,7 @@ const login = (username, password) => {
 
   return new Promise(function(resolve, reject) {
     axios.post('/auth/login', model).then(res => {
-      localStorage.setItem('AccessToken', res.data)
+      localStorage.setItem('AccessToken', res.data.accessToken)
       resolve();
     }).catch(error => {
       console.log('Login failed ' + error)
@@ -46,15 +53,22 @@ const login = (username, password) => {
 }
 
 const logout = () => {
+  axios.post('/auth/logout', null, {headers: getAuthHeaders()}).then(res => {
+    console.log('Logged out from server')
+    window.location.reload()
+  }).catch(error => {
+    console.log('Error logging out from server ' + error)
+    window.location.reload()
+  })
+
   localStorage.removeItem('AccessToken')
-  window.location.reload()
-  /* TODO: Send logout to server! */
 }
 
 module.exports = {
   getAccessToken,
   isSessionValid,
   getUserInfo,
+  getAuthHeaders,
   login,
   logout
 }

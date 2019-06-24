@@ -91,8 +91,17 @@ const authenticateByCredidentals = async(username, password) => {
     lastLogin: new Date().getTime()
   })
   
-  logger.log("User user session created. User: " + user.username + " session id: " + newSession.id, logger.DEBUG)
+  logger.log('User user session created. User: ' + user.username + ' session id: ' + newSession.id, logger.DEBUG)
   return newSession
+}
+
+/**
+ * Ends user session
+ * @param {*} session 
+ */
+const logout = (session) => {
+  activeSessions.delete(session.token)
+  logger.log('User ' + session.user.username + ' has logged out.', logger.DEBUG)
 }
 
 /**
@@ -151,6 +160,7 @@ const authMidlewareHandler = (req, res, next) => {
 
 module.exports = {
   authenticateByCredidentals,
+  logout,
   getActiveSessionForUserId,
   getSessionForToken,
   authMidlewareHandler

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import './Login.css'
 import avatar from './avatar.png'
-import { login } from '../../services/Auth'
+import { login, getSessionInfo } from '../../services/Auth'
 import Alert from './components/Alert'
 
 import Header from '../../components/header/Header'
@@ -16,6 +16,15 @@ class Login extends Component {
       password: '',
       inputDisabled: true,
     }
+  }
+
+  componentWillMount() {
+    /* If already logged in, redirect to panel. */
+    getSessionInfo().then((data) => {
+      console.log('Already logged in. Redirecting...')
+      this.props.history.push('/panel')
+    }).catch((error) => {
+    })
   }
 
   componentDidMount() {

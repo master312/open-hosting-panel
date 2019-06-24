@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import './Welcome.css'
-import Auth from '../../services/Auth'
+import { getAccessToken } from '../../services/Auth'
 
 import Header from '../../components/header/Header'
 
@@ -11,12 +11,12 @@ class Welcome extends Component {
     super()
 
     this.state = {
-      buttonText: Auth.getAccessToken() ? "Goto panel" : "Login"
+      buttonText: getAccessToken() ? "Goto panel" : "Login"
     }
   }
 
   buttonClickFunction() {
-    if (Auth.getAccessToken()) {
+    if (getAccessToken()) {
       this.props.history.push('/panel')
     } else {
       this.props.history.push('/login')

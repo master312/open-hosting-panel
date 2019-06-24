@@ -18,5 +18,11 @@ router.post('/register', auth.register)
 router.secure('/logout')
 router.post('/logout', auth.logout)
 
+/**
+ * Returns current session info
+ */
+router.secure('/info')
+router.get('/info', auth.info)
+
 module.exports = router
 

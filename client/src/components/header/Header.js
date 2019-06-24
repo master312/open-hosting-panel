@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import Auth from '../../services/Auth'
+import { logout } from '../../services/Auth'
 import logo from './logo.svg'
 import './Header.css'
 
@@ -11,7 +11,7 @@ class Header extends Component {
   }
 
   onLogoutClick() {
-    Auth.logout();
+    logout();
   }
 
   render() {

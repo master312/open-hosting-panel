@@ -8,18 +8,24 @@ const getAccessToken = () => {
 }
 
 /**
- * Checks with backend, wether current user session is stil valid
+ * Gets info about current session from backend
  */
-const isSessionValid = () => {
-  /* TODO */
-  return true;
-}
-
-/**
- * Returns details about currently logged in user, or null if not logged in
- */
-const getUserInfo = () => {
-  /* TODO */
+const getSessionInfo = () => {
+  if (!getAccessToken()) {
+    return new Promise(function(resolve, reject) { reject("not logged in") });
+  }
+  return new Promise(function(resolve, reject) {
+    axios.get('/auth/info', {headers: getAuthHeaders()}).then(res => {
+      resolve(res.data)
+    }).catch(error => {
+      if (error.response.status === 401) {
+        /* Session is invalid! Clear access token from local store */
+        localStorage.removeItem('AccessToken')
+      }
+      console.log('Could not get session info. ' + error)
+      reject(error.response)
+    })
+  })
 }
 
 /**
@@ -44,15 +50,18 @@ const login = (username, password) => {
   return new Promise(function(resolve, reject) {
     axios.post('/auth/login', model).then(res => {
       localStorage.setItem('AccessToken', res.data.accessToken)
-      resolve();
+      resolve()
     }).catch(error => {
       console.log('Login failed ' + error)
-      reject(error.response);
+      reject(error.response)
     })
   })
 }
 
-const logout = () => {
+/**
+ * Ends user sesison. Clears local store and lets backedn know that user has logged out.
+ */
+const logout = (localStoreOnly) => {
   axios.post('/auth/logout', null, {headers: getAuthHeaders()}).then(res => {
     console.log('Logged out from server')
     window.location.reload()
@@ -66,8 +75,7 @@ const logout = () => {
 
 module.exports = {
   getAccessToken,
-  isSessionValid,
-  getUserInfo,
+  getSessionInfo,
   getAuthHeaders,
   login,
   logout

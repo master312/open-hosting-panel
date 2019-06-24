@@ -5,8 +5,6 @@ const { logger } = require('../utils')
 const service = require('../service').auth
 const exception = require('../exception')
 
-const util = require('util')
-
 const login = async(req, res, next) => {
   try {
     if (!req.body.username || !req.body.password) {
@@ -39,8 +37,19 @@ const register = async(req, res, next) => {
   res.send("User registration unavailable!")
 }
 
+const info = async(req, res, next) => {
+  try {
+    var sessionInfo = service.getInfo(req.auth)
+    res.status(200)
+    res.send(sessionInfo)
+  } catch(error) {
+    next(error)
+  }
+}
+
 module.exports = {
   login,
   logout,
-  register
+  register,
+  info
 }

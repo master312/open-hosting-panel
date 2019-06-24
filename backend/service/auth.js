@@ -147,10 +147,10 @@ const authMidlewareHandler = (req, res, next) => {
   }
   var authSession = getSessionForToken(tokenSplit[1])
   if (!authSession) {
-    throw new exception.forbidden('Invalid token')
+    throw new exception.unauthorized('Invalid token')
   }
   if (authSession.hasExpired()) {
-    throw new exception.forbidden('Session expired')
+    throw new exception.unauthorized('Session expired')
   }
   
   /* Stores session to request object, so that controllers can access it */
@@ -158,10 +158,23 @@ const authMidlewareHandler = (req, res, next) => {
   next()
 }
 
+/**
+ * Extracts and returns basic data about session
+ * @param {*} session 
+ */
+const getInfo = (session) => {
+  return {
+    id: session.id,
+    username: session.user.username,
+    timeLeft: session.timeLeft()
+  }
+}
+
 module.exports = {
   authenticateByCredidentals,
   logout,
   getActiveSessionForUserId,
   getSessionForToken,
-  authMidlewareHandler
+  authMidlewareHandler,
+  getInfo
 }

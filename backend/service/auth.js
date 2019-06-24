@@ -91,7 +91,7 @@ const authenticateByCredidentals = async(username, password) => {
     lastLogin: new Date().getTime()
   })
   
-  logger.log("User user session created. User: " + user.username + " session id: " + newSession.id);
+  logger.log("User user session created. User: " + user.username + " session id: " + newSession.id, logger.DEBUG)
   return newSession
 }
 
@@ -120,8 +120,38 @@ const getActiveSessionForUserId = (userId) => {
   return null
 }
 
+/**
+ * Extracts auth token from header to handle request authorization.  
+ * If everything is OK .auth property containing all auth details 
+ * will be added to to request, and next functon called. 
+ * In case of error/unautorized access, exception will be thrown.
+ * @param {*} request 
+ */
+const authMidlewareHandler = (req, res, next) => {
+  var authHeader = req.get('Authorization')
+  if (!authHeader) {
+    throw new exception.unauthorized('No authorization header')
+  }
+  var tokenSplit = authHeader.split(/\s+/) 
+  if (tokenSplit[0] !== 'Bearer') {
+    throw new exception.badRequest('Invalid token type')
+  }
+  var authSession = getSessionForToken(tokenSplit[1])
+  if (!authSession) {
+    throw new exception.forbidden('Invalid token')
+  }
+  if (authSession.hasExpired()) {
+    throw new exception.forbidden('Session expired')
+  }
+  
+  /* Stores session to request object, so that controllers can access it */
+  req.auth = authSession
+  next()
+}
+
 module.exports = {
   authenticateByCredidentals,
   getActiveSessionForUserId,
-  getSessionForToken
+  getSessionForToken,
+  authMidlewareHandler
 }

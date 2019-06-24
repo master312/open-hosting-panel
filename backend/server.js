@@ -10,44 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => res.send('App is working'))
 
-
 function useAuthenticatedRouter(path, router) {
-  var authenticationHandler = function (req, res, next) {
-    /* TODO: Move this handler to service */
-    
-    var authHeader = req.get('Authorization')
-    if (!authHeader) {
-      /* Missing header */
-      res.status(401)
-      res.send()
-      return
-    }
-    var tokenSplit = authHeader.split(/\s+/); 
-    if (tokenSplit[0] !== 'Bearer') {
-      res.status(401)
-      res.send('Invalid token type ' + tokenSplit[0])
-      return;
-    }
-    var authSession = authService.getSessionForToken(tokenSplit[1])
-    if (!authSession) {
-      /* Invalid token */
-      res.status(401)
-      res.send('Invalid token')
-      return
-    }
-    if (authSession.hasExpired()) {
-      /* Session expired */
-      res.status(401)
-      res.send('Session expired')
-      return
-    }
-    
-    /* Stores session to request object, so that controllers can access it */
-    req.auth = authSession
-    next()
-  }
-  
-  app.use(path, authenticationHandler)
+  app.use(path, authService.authMidlewareHandler)
   app.use(path, router)
 }
 

@@ -73,7 +73,7 @@ function generateAccessToken() {
 const authenticateByCredidentals = async(username, password) => {
   var user = await userService.getByUsernameAndPassword(username, password)
   if (!user) {
-    throw new exception.notFound('Bad credidentals')
+    throw new exception.unauthorized('Bad credidentals')
   }
   
   var existingSession = getActiveSessionForUserId(user.id)

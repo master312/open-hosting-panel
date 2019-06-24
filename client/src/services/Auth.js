@@ -1,25 +1,25 @@
-
+const axios = require('axios')
 
 /**
  * Returns access token or NULL if user is not logged in
  */
 const getAccessToken = () => {
-    return localStorage.getItem('AccessToken')
+  return localStorage.getItem('AccessToken')
 }
 
 /**
  * Returns boolean wether current user session is stil valid
  */
 const isSessionValid = () => {
-    /* TODO */
-    return true;
+  /* TODO */
+  return true;
 }
 
 /**
  * Returns details about currently logged in user, or null if not logged in
  */
 const getUserInfo = () => {
-    /* TODO */
+  /* TODO */
 }
 
 /**
@@ -29,12 +29,25 @@ const getUserInfo = () => {
  * @param {*} password 
  */
 const login = (username, password) => {
-    /* TODO */
+  const model = {
+    username: username,
+    password: password
+  }
+
+  return new Promise(function(resolve, reject) {
+    axios.post('/auth/login', model).then(res => {
+      localStorage.setItem('AccessToken', res.data)
+      resolve();
+    }).catch(error => {
+      console.log('Login failed ' + error)
+      reject(error.response);
+    })
+  })
 }
 
 module.exports = {
-    getAccessToken,
-    isSessionValid,
-    getUserInfo,
-    login
+  getAccessToken,
+  isSessionValid,
+  getUserInfo,
+  login
 }

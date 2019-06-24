@@ -6,4 +6,5 @@ U BackEnd-u, sve malim slovima!
 -- MOZADA da se otarasis indexa services, controllers i tako to, i da preimenujes sve fajlove u 'user->user_servce' 'auth->auth_service' 'instance->instance_service' itd. I da zajebes ove glupe inkludove require('../service').auth, vec radi require('../service/auth_service')
 -- User permissions
 -- User status (banned/unbanned)
+-- Encrypt passwords in DB
 -- Check model for unique, indexes and stuff

@@ -19,7 +19,7 @@ app.use('/api/instance', require('./route/instance'))
 /* Exception handling method */
 app.use(function (err, req, res, next) {
   if (err.statusCode == 500) {
-    /* Log to console ONLY on error 500*/
+    /* Log to console ONLY on error 500 */
     logger.log("ExpressException:" + err.message + " STACK: " + err.stack, logger.EXCEPTION);
   }
   res.status(err.statusCode || 500).send(err.message || 'Server error')

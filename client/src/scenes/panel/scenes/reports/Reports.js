@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import './Service.css'
-
-
-class Service extends Component {
+class Reports extends Component {
 
   render() {
     return (
       <div>
-        <h2 class="text-center">PajdoService</h2>
+        <h2 class="text-center">PajdoReports</h2>
       </div>
     )
   }
 }
 
-export default withRouter(Service)
+export default withRouter(Reports)

@@ -9,7 +9,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <h2 class="text-center">PajdoDashboard</h2>
+        <h2 class="text-center">DASHBOARD</h2>
       </div>
     )
   }

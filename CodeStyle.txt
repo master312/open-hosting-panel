@@ -10,3 +10,12 @@ U BackEnd-u, sve malim slovima!
 -- Check model for unique, indexes and stuff
 -- User logout on backend
 -- Renejmuj mnozinu u imenovanju folders/fajlova... Iz components u component. Iz scenes u scene itd...
+
+
+-- NEXT TODO --
+- Napravi osnovne panel widgete (components) - (pogledaj one bootstrap admin templejte da vidis kako su oni to uradili)
+   - Empty widget, Card widget, table widget, Charts widget
+   - Napravi grid system (uglavnom css) za pozicioniranje widgeta na stranici
+
+- Napravi notification system (sa opcijom za pozicioniranje)
+-- Nakon sto je sve to odradjeno, na red dolazi osnovni functionality (kreiranje, startovanje, stopovanje i restartovanje servisa. Pravljenje DB usera za svaki servis... Tako da te automacki ulogije sa ovog panela na MyPhpAdmin sa nekim kilomentarskim userom)

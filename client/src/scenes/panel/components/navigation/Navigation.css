@@ -1,0 +1,43 @@
+.navlink:link {
+  text-decoration: none;
+  outline: 0;
+}
+
+.navlink-active .nav-item {
+  border-bottom: 3px solid red;
+  background-color: #d1d0d0a8;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.nav-item {
+  text-decoration-color: black;
+  
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgb(0, 0, 0);
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item:after {
+  content: '';
+  position: absolute;
+  width: 0; 
+  height: 3px;
+  display: block;
+  margin-top: 8px;
+  right: 0;
+  background: rgb(219, 7, 7);
+  transition: width .2s ease;
+  -webkit-transition: width .2s ease;
+}
+ 
+.nav-item:hover:after {
+  width: 100%;
+  left: 0;
+  background: rgb(255, 0, 0);
+}

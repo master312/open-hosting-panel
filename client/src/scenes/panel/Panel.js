@@ -5,7 +5,7 @@ import './Panel.css'
 
 import Header from '../../components/header/Header'
 
-import Navigation from './components/Navigation'
+import Navigation from './components/navigation/Navigation'
 
 import Dashboard from './scenes/dashboard/Dashboard'
 import Service from './scenes/service/Service'

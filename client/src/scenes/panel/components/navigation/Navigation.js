@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { logout } from '../../../services/Auth'
+import { logout } from '../../../../services/Auth'
 import './Navigation.css'
 
 class Nav extends Component {

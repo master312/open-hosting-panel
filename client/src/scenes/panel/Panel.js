@@ -1,22 +1,17 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, withRouter } from 'react-router-dom'
-import { logout } from '../../services/Auth'
+import { Route, withRouter, Redirect } from 'react-router-dom'
 
 import './Panel.css'
 
 import Header from '../../components/header/Header'
+
+import Navigation from './components/Navigation'
 
 import Dashboard from './scenes/dashboard/Dashboard'
 import Service from './scenes/service/Service'
 import Settings from './scenes/settings/Settings'
 import Messages from './scenes/messages/Messages'
 import Reports from './scenes/reports/Reports'
-
-/**
- * TODO: Rewrite whole navigation system
- * NEEDS RESEARCH FIRST!!
- * Prevent re-loading of whole page while navigating. Instead, only change components
- */
 
 class Panel extends Component {
 
@@ -29,34 +24,18 @@ class Panel extends Component {
   render() {
     return (
       <div>
+        
         <Header />
-        <div>
-          {/* Navigation menu */}
-          <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <div class="container">
-              <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav">
-                  <a href={this.getRootPath() + "dashboard"} class="nav-item nav-link active">Dashboard</a>
-                  <a href={this.getRootPath() + "settings" } class="nav-item nav-link">Settings</a>
-                  <a href={this.getRootPath() + "messages" } class="nav-item nav-link">Messages</a>
-                  <a href={this.getRootPath() + "reports" } class="nav-item nav-link disabled" tabindex="-1">Reports</a>
-                </div>
+        <Navigation />
 
-                <div class="navbar-nav ml-auto">
-                  <a href="/" onClick={()=>logout()} class="nav-item nav-link">Logout</a>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
-    
-        <BrowserRouter basename={this.getRootPath()}>
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/service" component={Service} />
-          <Route path="/settings" component={Settings} />
-          <Route path="/messages" component={Messages} />
-          <Route path="/reports" component={Reports} />
-        </BrowserRouter>
+        <Route exact path={this.getRootPath()} render={() => (
+            <Redirect to={this.getRootPath() + "dashboard"} />
+        )}/>
+        <Route exact path={this.getRootPath() + "dashboard"} component={Dashboard} />
+        <Route exact path={this.getRootPath() + "service"} component={Service} />
+        <Route exact path={this.getRootPath() + "settings"} component={Settings} />
+        <Route exact path={this.getRootPath() + "messages"} component={Messages} />
+        <Route exact path={this.getRootPath() + "reports"} component={Reports} />
       </div>
     )
   }

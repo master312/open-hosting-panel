@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <Router >
-        <div className="app">
+        <div className="app bg-light">
           <Route exact path="/" component={Welcome} />
           <Route exact path="/login" component={Login} />
           

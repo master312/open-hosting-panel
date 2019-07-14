@@ -9,5 +9,4 @@ U BackEnd-u, sve malim slovima!
 -- Encrypt passwords in DB
 -- Check model for unique, indexes and stuff
 -- User logout on backend
--- Nadji bolji nacin za linkovanje na panelu!! SREDI LINKOVANJE NA PANELU!!1 Trenutno je nahakovano fino. MORA DA POSTOJI BOLJI NACIN!!
 -- Renejmuj mnozinu u imenovanju folders/fajlova... Iz components u component. Iz scenes u scene itd...

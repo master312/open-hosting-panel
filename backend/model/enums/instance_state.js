@@ -1,6 +1,6 @@
 module.exports = {
   uninitialized: "Uninitialized",
   running: "Running",
-  stoped: "Stoped",
+  stopped: "Stopped",
   creating: "Creating"
 };

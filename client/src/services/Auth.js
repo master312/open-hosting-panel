@@ -1,6 +1,38 @@
 const axios = require('axios')
 
 /**
+ * How often to check session validity with backend
+ */
+const SESSION_VALIDATION_INTERVAL = 1500
+
+/**
+ * Checks with backend to see if sesion is still valid. If not, log user out
+ */
+const validateSession = () => {
+  if (getAccessToken() == null) {
+    return
+  }
+
+  var currentTime = new Date().getTime()
+  if (currentTime - validateSession.lastCheckTime <= SESSION_VALIDATION_INTERVAL) {
+    return
+  }
+  validateSession.lastCheckTime = currentTime
+
+  axios.get('/auth/checkValid', {headers: getAuthHeaders()}).then(res => {
+    // Session is still valid
+  }).catch(error => {
+    if (error.response.status === 401) {
+      /* Session is invalid! Clear access token from local store */
+      localStorage.removeItem('AccessToken')
+      alert("Session expired! Please relog")
+      window.location.reload()
+    }
+    console.log('Could not do session validity check ' + error)
+  })
+}
+
+/**
  * Returns access token or NULL if user is not logged in
  */
 const getAccessToken = () => {
@@ -12,7 +44,7 @@ const getAccessToken = () => {
  */
 const getSessionInfo = () => {
   if (!getAccessToken()) {
-    return new Promise(function(resolve, reject) { reject("not logged in") });
+    return new Promise(function(resolve, reject) { reject("not logged in") })
   }
   return new Promise(function(resolve, reject) {
     axios.get('/auth/info', {headers: getAuthHeaders()}).then(res => {
@@ -74,6 +106,7 @@ const logout = (localStoreOnly) => {
 }
 
 module.exports = {
+  validateSession,
   getAccessToken,
   getSessionInfo,
   getAuthHeaders,

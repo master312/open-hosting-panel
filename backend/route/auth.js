@@ -24,5 +24,11 @@ router.post('/logout', auth.logout)
 router.secure('/info')
 router.get('/info', auth.info)
 
+/**
+ * Returns if current session is valid or not
+ */
+router.secure('/checkValid')
+router.get('/checkValid', auth.checkValid)
+
 module.exports = router
 

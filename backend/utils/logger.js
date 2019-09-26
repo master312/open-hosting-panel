@@ -12,24 +12,24 @@ var logger = {
     ERROR: 4
   };
   
-  var loggerLevelText = { };
-  loggerLevelText[logger.DEBUG] = "DEBUG";
-  loggerLevelText[logger.INFO] = "INFO";
-  loggerLevelText[logger.WARNING] = "WARNING";
-  loggerLevelText[logger.EXCEPTION] = "EXCEPTION";
-  loggerLevelText[logger.ERROR] = "ERROR";
-  
-  logger.log = function(message, type) {
-    if (type == null) {
-      type = logger.DEBUG;
-    }
-    var msg = loggerLevelText[type] + ": " + message;
-  
-    if (type == logger.EXCEPTION) {
-      console.error(msg);
-    } else {
-      console.log(msg);
-    }
+var loggerLevelText = { };
+loggerLevelText[logger.DEBUG] = "DEBUG";
+loggerLevelText[logger.INFO] = "INFO";
+loggerLevelText[logger.WARNING] = "WARNING";
+loggerLevelText[logger.EXCEPTION] = "EXCEPTION";
+loggerLevelText[logger.ERROR] = "ERROR";
+
+logger.log = function(message, type) {
+  if (type == null) {
+    type = logger.DEBUG;
   }
-  
-  module.exports = logger;
+  var msg = loggerLevelText[type] + ": " + message;
+
+  if (type == logger.EXCEPTION) {
+    console.error(msg);
+  } else {
+    console.log(msg);
+  }
+}
+
+module.exports = logger;

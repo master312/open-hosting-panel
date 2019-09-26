@@ -2,7 +2,7 @@
  * Contoller used for exposing public user functions. Like login, register and forgot password. 
  */
 const { logger } = require('../utils')
-const service = require('../service').auth
+const service = require('../service/auth')
 const exception = require('../exception')
 
 const login = async(req, res, next) => {
@@ -47,9 +47,24 @@ const info = async(req, res, next) => {
   }
 }
 
+const checkValid = async(req, res, next) => {
+  try {
+    if (service.isValid(req.auth)) {
+      res.status(204)
+      res.send()
+    } else {
+      res.status(401)
+      res.send()
+    }
+  } catch(error) {
+    next(error)
+  }
+}
+
 module.exports = {
   login,
   logout,
   register,
-  info
+  info,
+  checkValid
 }

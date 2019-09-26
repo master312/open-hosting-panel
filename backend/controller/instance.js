@@ -1,5 +1,5 @@
 const { logger } = require('../utils')
-const service = require('../service').instance
+const service = require('../service/instance')
 
 // EXAMPLE: Extract json form data... {"user":{}, "content":{}} -> user, content
 //const {user, content} = req.body 
@@ -8,7 +8,7 @@ const getAll = async(req, res, next) => {
   try {
     var instances = await service.getAll(req.auth.user)
     res.status(200)
-    res.send(instances);
+    res.send(instances)
     next()
   } catch(error) {
     next(error)
@@ -20,7 +20,7 @@ const get = async(req, res, next) => {
   try {
     var instance = await service.getSingle(req.auth.user, id)
     res.status(200)
-    res.send(instance);
+    res.send(instance)
     next()
   } catch(error) {
     next(error)

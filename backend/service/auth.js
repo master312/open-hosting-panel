@@ -170,11 +170,19 @@ const getInfo = (session) => {
   }
 }
 
+/**
+ * Returns whether use session is still valid or not 
+ */
+const isValid = (session) => {
+  return !session.hasExpired()
+}
+
 module.exports = {
   authenticateByCredidentals,
   logout,
   getActiveSessionForUserId,
   getSessionForToken,
   authMidlewareHandler,
-  getInfo
+  getInfo,
+  isValid
 }

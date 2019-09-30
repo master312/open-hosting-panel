@@ -23,3 +23,4 @@ U BackEnd-u, sve malim slovima!
 
 --- EXTEND AXIO to always include auth headers (if any)
 --- RENAME 'instance' to 'container'
+--- TODO: Check if sequelize DB relations are working properly (instance.js find ' .belongsTo( ')

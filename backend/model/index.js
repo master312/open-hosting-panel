@@ -21,6 +21,12 @@ Object.keys(db).forEach(modelName => {
   }
 })
 
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].initRelations) {
+    db[modelName].initRelations(db)
+  }
+})
+
 db.sequelize = sequelize
 
 if (sequelize.forceCreate) {

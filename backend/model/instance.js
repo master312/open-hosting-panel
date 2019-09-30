@@ -13,5 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     uptime: { type: DataTypes.BIGINT, allowNull: true }
   })
 
+  instance.initRelations = function(models) {
+    instance.belongsTo(models['user'], {foreignKey: 'userId'});
+  }
+
   return instance
 }

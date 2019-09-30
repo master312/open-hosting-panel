@@ -38,7 +38,7 @@ async function loadSessions() {
     var newSession = new authSession(session.id, null, session.token, session.startTime);
     if (newSession.hasExpired()) {
       // Sesison has expired... Delete from DB
-      logger.log("Saved session expired.". logger.DEBUG)
+      logger.log("Saved session expired.", logger.DEBUG)
       session.destroy()
     } else {
       var user = await userService.getById(session.userId)

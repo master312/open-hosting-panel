@@ -27,7 +27,7 @@ class Nav extends Component {
               </NavLink>
             </div>
             <div class="navbar-nav ml-auto">
-              <a href="/" onClick={()=>logout()} class="nav-item nav-link">Logout</a>
+              <a href="/" onClick={(e)=> {e.preventDefault(); logout();}} class="nav-item nav-link">Logout</a>
             </div>
           </div>
         </div>

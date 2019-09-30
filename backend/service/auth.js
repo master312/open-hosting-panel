@@ -1,6 +1,5 @@
 const { logger, generator } = require('../utils')
 const userService = require('./user')
-const utils = require('util')
 const exception = require('../exception')
 const authSessionModel = require('../model').auth_session
 
@@ -46,7 +45,7 @@ async function loadSessions() {
       if (user == null) {
         // User dose not exists anymore. Destroy session
         session.destroy()
-        logger.log("User for saved session dose not exists.". logger.WARNING)
+        logger.log("User for saved session dose not exists.", logger.WARNING)
         return
       }
       newSession.user = user
@@ -151,6 +150,7 @@ const authenticateByCredidentals = async(username, password) => {
  * @param {*} session 
  */
 const logout = (session) => {
+  authSessionModel.destroy({where: {token: session.token}})
   activeSessions.delete(session.token)
   logger.log('User ' + session.user.username + ' has logged out.', logger.DEBUG)
 }

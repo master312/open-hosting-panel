@@ -96,13 +96,13 @@ const login = (username, password) => {
 const logout = (localStoreOnly) => {
   axios.post('/auth/logout', null, {headers: getAuthHeaders()}).then(res => {
     console.log('Logged out from server')
+    localStorage.removeItem('AccessToken')
     window.location.reload()
   }).catch(error => {
     console.log('Error logging out from server ' + error)
+    localStorage.removeItem('AccessToken')
     window.location.reload()
   })
-
-  localStorage.removeItem('AccessToken')
 }
 
 module.exports = {

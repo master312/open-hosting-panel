@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 /**
- * How often to check session validity with backend
+ * How often to check session validity with backend (value in MS)
  */
 const SESSION_VALIDATION_INTERVAL = 1500
 

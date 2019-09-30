@@ -21,7 +21,7 @@ module.exports = sequelize
 //   birthday: Sequelize.DATE
 // });
 // TODO: Remove. DB automatic creation of tables.
-// db.sync({ force: true })
+// sequelize.sync({ force: true })
 //   .then(() => {
 //     console.log(`Database & tables created!`)
 //   }) 

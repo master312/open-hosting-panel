@@ -2,6 +2,7 @@ const { logger, generator } = require('../utils')
 const userService = require('./user')
 const utils = require('util')
 const exception = require('../exception')
+const authSessionModel = require('../model').auth_session
 
 /**
  * How long can a single user session last (in miliseconds) 
@@ -13,7 +14,6 @@ const ACCESS_TOKEN_LENGTH = 64
 
 /**
  * Array of all currently active user sessions. Maped by access token
- * TODO: Move session store to database
  * TODO: 'Cron job' to clear expired sessions
  */
 var activeSessions = new Map()
@@ -24,16 +24,67 @@ var activeSessions = new Map()
 var sessionIdCounter = 0
 
 /**
- * Represents currently logged in user session
+ * Load all saved active sessions from DB
+ */
+async function loadSessions() {
+  var sessions = await authSessionModel.findAll()
+  sessionIdCounter = 0
+
+  for (var i = 0; i < sessions.length; i++) {
+    var session = sessions[i]
+
+    if (session.id > sessionIdCounter) {
+      sessionIdCounter = session.id
+    }
+    var newSession = new authSession(session.id, null, session.token, session.startTime);
+    if (newSession.hasExpired()) {
+      // Sesison has expired... Delete from DB
+      logger.log("Saved session expired.". logger.DEBUG)
+      session.destroy()
+    } else {
+      var user = await userService.getById(session.userId)
+      if (user == null) {
+        // User dose not exists anymore. Destroy session
+        session.destroy()
+        logger.log("User for saved session dose not exists.". logger.WARNING)
+        return
+      }
+      newSession.user = user
+      activeSessions.set(newSession.token, newSession)
+    }
+  }
+
+  sessionIdCounter++
+
+  console.log("AUTH: Loaded " + activeSessions.size + " auth sessions from DB")
+}
+
+/**
+ * Generates new authSession for user
+ * 
  * @param {user model} user 
  * @param {string} token 
  */
-function userSession(user) {
+function newUserSession(user) {
   sessionIdCounter += 1
-  this.id = sessionIdCounter
+  var newSession =  new authSession(sessionIdCounter, user, generateAccessToken(), new Date().getTime())
+  // Save new auth session to database
+  const sessionObj = authSessionModel.build({token: newSession.token, startTime: newSession.startTime, userId: newSession.user.id})
+  sessionObj.save().then(() => {
+    logger.log("New user session saved!", logger.INFO)
+  })
+
+  return newSession
+}
+
+/**
+ * Auth session producer function
+ */
+function authSession(id, user, token, startTime) {
+  this.id = id
   this.user = user
-  this.token = generateAccessToken()
-  this.startTime = new Date().getTime()
+  this.token = token
+  this.startTime = startTime
 
   this.timeLeft = () => {
     return USER_SESSION_TIMEOUT - (new Date().getTime() - this.startTime)
@@ -83,7 +134,7 @@ const authenticateByCredidentals = async(username, password) => {
   }
 
   /* Create new session */
-  var newSession = new userSession(user)
+  var newSession = newUserSession(user)
   activeSessions.set(newSession.token, newSession)
 
   /* Save session time and IP to database */
@@ -176,6 +227,8 @@ const getInfo = (session) => {
 const isValid = (session) => {
   return !session.hasExpired()
 }
+
+loadSessions();
 
 module.exports = {
   authenticateByCredidentals,

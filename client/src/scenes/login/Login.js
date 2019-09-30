@@ -73,7 +73,12 @@ class Login extends Component {
     }).catch((error) => {
       setTimeout(() => {
         this.setInputState(true)
-        this.refs.Alert.show('danger', error.data)
+        if (error.status === 401) {
+          this.refs.Alert.show('danger', error.data)
+        } else {
+          this.refs.Alert.show('danger', "Server error code: " + error.status)
+          console.log(error.data)
+        }
       }, 1000)
     })
   }

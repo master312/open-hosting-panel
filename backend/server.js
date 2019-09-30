@@ -15,6 +15,7 @@ require('./model')
 /* Make use of routes */
 app.use('/auth', require('./route/auth'))
 app.use('/api/instance', require('./route/instance'))
+app.use('/api/credidentals', require('./route/credidental_provider'))
 
 /* Exception handling method */
 app.use(function (err, req, res, next) {

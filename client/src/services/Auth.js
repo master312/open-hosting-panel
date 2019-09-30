@@ -93,7 +93,7 @@ const login = (username, password) => {
 /**
  * Ends user sesison. Clears local store and lets backedn know that user has logged out.
  */
-const logout = (localStoreOnly) => {
+const logout = () => {
   axios.post('/auth/logout', null, {headers: getAuthHeaders()}).then(res => {
     console.log('Logged out from server')
     localStorage.removeItem('AccessToken')

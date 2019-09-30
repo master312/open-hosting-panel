@@ -17,7 +17,7 @@ class Panel extends Component {
 
   getRootPath() {
     var rootPath = this.props.match.path
-    rootPath = rootPath.substring(0, rootPath.indexOf(':'))
+    rootPath = rootPath.substring(0, rootPath.indexOf('*'))
     return rootPath ? rootPath : this.props.match.path + '/'
   }
 
@@ -30,9 +30,12 @@ class Panel extends Component {
 
         <Route exact path={this.getRootPath()} render={() => (
             <Redirect to={this.getRootPath() + "dashboard"} />
-        )}/>
+        )}/>        
         <Route exact path={this.getRootPath() + "dashboard"} component={Dashboard} />
-        <Route exact path={this.getRootPath() + "service"} component={Service} />
+
+        <Route exact path={this.getRootPath() + "service" } component={Service} />
+        <Route exact path={this.getRootPath() + "service/*" } component={Service} />
+        
         <Route exact path={this.getRootPath() + "settings"} component={Settings} />
         <Route exact path={this.getRootPath() + "messages"} component={Messages} />
         <Route exact path={this.getRootPath() + "reports"} component={Reports} />

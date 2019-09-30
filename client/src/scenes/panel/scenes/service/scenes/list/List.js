@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import {
+  Button,
   ButtonDropdown,
   CardBody,
   DropdownItem,
@@ -20,11 +21,20 @@ class List extends Component {
     this.state = {
     };
   }
+
+  getRootPath() {
+    // .path is like: "base.com/service/list"
+    var path = this.props.match.path
+    var index = path.indexOf('list')
+    return path.substring(0, index > 0 ? index : path.length)
+  }
   
   render() {
     return (
       <div class="container-fluid">
         <CardBody>
+          <Button color="primary" onClick={() => this.props.history.push(this.getRootPath() + "new")}>New service</Button>
+
           <Table hover responsive className="table-outline mb-0 d-none d-sm-table">
             <thead className="thead-light">
             <tr>
@@ -37,16 +47,16 @@ class List extends Component {
             <tbody>
             <tr>
               <td className="text-center">
-                Magic Shop
+                Satanic Stuff
               </td>
               <td>
                 <div class="text-success">Running</div>
                 <div className="small text-muted">
-                  Uptime: 1d 11h 17m
+                  Uptime: 6d 6h 6m
                 </div>
               </td>
               <td className="text-center">
-                dop.com
+                root.satan.com
               </td>
               <td>
                 <div className="clearfix">

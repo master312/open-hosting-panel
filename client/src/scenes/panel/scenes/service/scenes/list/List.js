@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import {
-  Button,
-  ButtonDropdown,
-  CardBody,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Table,
+import { Container, Button, ButtonDropdown, CardBody, DropdownItem, DropdownMenu, DropdownToggle, Table,
 } from 'reactstrap';
 
 import './../../Service.css'
@@ -31,7 +24,7 @@ class List extends Component {
   
   render() {
     return (
-      <div class="container-fluid">
+      <Container fluid={ true }>
         <CardBody>
           <Button color="primary" onClick={() => this.props.history.push(this.getRootPath() + "new")}>New service</Button>
 
@@ -76,7 +69,7 @@ class List extends Component {
             </tbody>
           </Table>
         </CardBody>
-      </div>
+      </Container>
     )
   }
 }

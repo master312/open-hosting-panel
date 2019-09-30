@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import { Route, withRouter, Redirect } from 'react-router-dom'
-import {
-  Card,
-  CardHeader,
-  Col,
-  Row,
-} from 'reactstrap';
+import { Container, Card, CardHeader, Col, Row } from 'reactstrap';
 
 import './Service.css'
 import List from './scenes/list/List' 
@@ -32,7 +27,7 @@ class Service extends Component {
 
   render() {
     return (
-      <div class="container-fluid">
+      <Container fluid={ true }>
         <Row>
           <Col>
             <Card>
@@ -50,7 +45,7 @@ class Service extends Component {
             </Card>
           </Col>
         </Row>
-      </div>
+      </Container>
     )
   }
 }
